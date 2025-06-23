@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use App\Models\User;
 
 class StudentController extends Controller
 {
     /**
      * Show the student's dashboard.
      */
-    public function dashboard($hash)
+    public function dashboard()
     {
-        $userId = Crypt::decryptString($hash);
-        $user = User::findOrFail($userId);
+        $user = Auth::user();
 
-        // Check if accessing own dashboard
-        if (Auth::id() !== $user->id) {
+        // Check if user is logged in and is a student (role_id = 3)
+        if (!$user || $user->role_id !== 3) {
             abort(403, 'Unauthorized access.');
         }
 
