@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -39,8 +40,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 // Students Dashboard Routes
-
-
 Route::middleware(['auth', 'verified', 'student'])->prefix('portal/u/0')->name('students.')->group(function () {
     Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+});
+
+
+// Super Admin Dashboard Routes
+Route::middleware(['auth', 'verified', 'superadmin'])->prefix('portal/s/a/0/')->name('superadmin.')->group(function () {
+    Route::get('/dashboard', [SuperAdminController::class, 'dashboard'])->name('dashboard');
 });

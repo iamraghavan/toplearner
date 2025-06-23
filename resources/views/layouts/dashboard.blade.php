@@ -41,7 +41,17 @@
 
 
 <!-- ============================ Sidebar Start ============================ -->
-<livewire:student-dashboard-sidebar />
+@auth
+    @if (Auth::user()->role_id === 1)
+        <livewire:superadmin-dashboard-sidebar />
+    @elseif (Auth::user()->role_id === 3)
+        <livewire:student-dashboard-sidebar />
+    @elseif (Auth::user()->role && Auth::user()->role->name === 'teacher')
+        {{-- Uncomment and create this component if needed --}}
+        {{-- <livewire:teacher-dashboard-sidebar /> --}}
+    @endif
+@endauth
+
 <!-- ============================ Sidebar End  ============================ -->
 
 {{-- dashboard --}}

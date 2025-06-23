@@ -4,47 +4,7 @@
 
         <!-- Authenticated User Dashboard -->
         <div class="animate-fade-in">
-            @auth
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-                <div class="flex items-center space-x-4">
-                    <img class="h-12 w-12 rounded-full" src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&length=2" alt="{{ Auth::user()->name }}">
-                    <div>
-                        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Welcome, {{ Auth::user()->name }}!</h1>
-                        <p class="text-sm text-gray-500">You are logged in as <span class="font-medium capitalize">{{ Auth::user()->role->name }}</span></p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Role-Based Navigation -->
-            <nav class="mb-8">
-                <ul class="flex flex-wrap gap-3 sm:gap-4">
-                    @if(Auth::user()->role->name == 'student')
-                        <li>
-                            <a href="{{ route('students.dashboard') }}" class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-md hover:bg-indigo-50 hover:text-indigo-600 transition-colors {{ Route::is('students.dashboard') ? 'bg-indigo-50 text-indigo-600' : '' }}">
-                                Student Dashboard
-                            </a>
-                        </li>
-                    @elseif(Auth::user()->role->name == 'institution-admin')
-                        <li>
-                            <a href="{{ route('institution.dashboard') }}" class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-md hover:bg-indigo-50 hover:text-indigo-600 transition-colors {{ Route::is('institution.dashboard') ? 'bg-indigo-50 text-indigo-600' : '' }}">
-                                Institution Dashboard
-                            </a>
-                        </li>
-                    @endif
-                </ul>
-            </nav>
-    @else
-            <!-- Dashboard Content -->
-            <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6 transition-all hover:shadow-md">
-                <h2 class="text-lg sm:text-xl font-semibold text-gray-800 mb-4">Your Learning Journey</h2>
-                <p class="text-gray-600 text-sm sm:text-base">Explore your courses, assignments, and resources from the sidebar to continue your learning journey.</p>
-                <div class="mt-4">
-                    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-colors">View Courses</a>
-                </div>
-            </div>
-        </div>
-
-        @endauth
 
         <!-- Unauthenticated User Landing Page -->
         <!-- Hero Section -->
